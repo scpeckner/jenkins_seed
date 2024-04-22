@@ -12,4 +12,19 @@ reposToTrack.each { repo ->
             }
         }
     }
+    pipelineJob(repo+'_release') {
+        definition {
+            cpsScm {
+                scm {
+                    git{
+                        remote {
+                            url("https://github.com/${org}/${repo}.git")
+                            credentialsId('scpeckner-up')
+                        }
+                    }
+                    scriptPath('Jenkinsfile.release')
+                }
+            }
+        }
+    }
 }
