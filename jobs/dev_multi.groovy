@@ -17,9 +17,10 @@ reposToTrack.each { repo ->
             cpsScm {
                 scm {
                     git{
+                        branch('develop')
                         remote {
                             url("https://github.com/${org}/${repo}.git")
-                            credentialsId('scpeckner-up')
+                            credentials('scpeckner-up')
                         }
                     }
                     scriptPath('Jenkinsfile.release')
