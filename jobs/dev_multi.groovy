@@ -1,21 +1,15 @@
-job('seed1'){
-    description('seed job')
-    concurrentBuild(false)
-    scm {
+org = 'scpeckner'
+repoToTrack = 'jenkins'
+
+multibranchPipelineJob('multi1') {
+    branchSources {
         git {
-            remote {
-                url('https://github.com/scpeckner/jenkins_seed.git')
-                credentials('scpeckner-sp')
-            }
-            branch('main')
+          remote("https://github.com/${org}/${repoToTrack}.git")
+            credentialsId('scpeckner-up') // If using credentials
+            includes('*') // Match all branches
+            id= org+'_'+repoToTrack
+
         }
     }
-    steps {
-        dsl {
-            external('jobs/*.groovy')
-        }
-    }
-    triggers {
-        scm('H/5 * * * *')
-    }
+
 }
