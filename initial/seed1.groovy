@@ -9,7 +9,7 @@ job('seed1'){
                 credentials('scpeckner-sp')
             }
             branch('main')
-            scriptPath('initial/seed1.groovy')
+
         }
     }
     steps {
